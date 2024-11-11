@@ -18,7 +18,7 @@ function Room() {
     const [revealed, setRevealed] = useState(false);
     const roomRef = ref(db, `rooms/${roomid}`);
     const haveAnswered = !!answers.find((a) => a.userid === settings.userID);
-    const isLocked = haveAnswered || !username;
+    const isLocked = haveAnswered || !username || !init;
     const isCreator = creator === settings.userID;
 
     useEffect(() => {
@@ -68,7 +68,7 @@ function Room() {
     }, [username, settings.userID, init]);
 
     const handleAnswerSubmit = (submittedAnswer = answer) => {
-        if (submittedAnswer) {
+        if (init && submittedAnswer) {
             update(ref(db, `rooms/${roomid}/answers/${settings.userID}`), {
                 answer: submittedAnswer,
                 userid: settings.userID,
@@ -82,16 +82,22 @@ function Room() {
         handleAnswerSubmit(letter);
     };
 
-    const handleRevealAnswers = () =>
-        update(roomRef, {
-            revealed: !revealed,
-        });
+    const handleRevealAnswers = () => {
+        if (init) {
+            update(roomRef, {
+                revealed: !revealed,
+            });
+        }
+    };
 
-    const handleResetAnswers = () =>
-        update(roomRef, {
-            revealed: false,
-            answers: {},
-        });
+    const handleResetAnswers = () => {
+        if (init) {
+            update(roomRef, {
+                revealed: false,
+                answers: {},
+            });
+        }
+    };
 
     async function handleShare() {
         try {
