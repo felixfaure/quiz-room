@@ -39,6 +39,7 @@ Before you can use or develop this project, you need to have a Firebase project 
     VITE_FIREBASE_MESSAGING_SENDER_ID=your-firebase-messaging-sender-id
     VITE_FIREBASE_APP_ID=your-firebase-app-id
     VITE_FIREBASE_MEASUREMENT_ID=your-firebase-measurement-id
+    VITE_APP_URL=your-app-url
     ```
 
     You can obtain these values from the **Firebase Console** under **Project Settings** (top left).

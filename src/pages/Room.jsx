@@ -100,11 +100,12 @@ function Room() {
     };
 
     async function handleShare() {
+        const baseUrl = import.meta.env.VITE_APP_URL;
         try {
             await navigator.share({
                 title: "Quiz Room",
                 text: "Invit friends",
-                url: `https://quiz-room-df696.web.app/room/${roomid}`,
+                url: `${baseUrl.replace(/\/$/, "")}/room/${roomid}`,
             });
         } catch (err) {
             console.log(err);
