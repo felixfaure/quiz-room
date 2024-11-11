@@ -1,6 +1,50 @@
 {
     "rules": {
-        ".read": true,
-        ".write": true
+        ".read": false,
+        ".write": false,
+        "rooms": {
+            ".write": true,
+            "$room_id": {
+                ".read": true,
+                "answers": {
+                    "$user_id": {
+                        "answer": {
+                            ".validate": "newData.isString()"
+                        },
+                        "timestamp": {
+                            ".validate": "newData.isNumber()"
+                        },
+                        "userid": {
+                            ".validate": "newData.isString() && newData.val() == $user_id"
+                        },
+                        "$other": {
+                            ".validate": false
+                        }
+                    }
+                },
+                "players": {
+                    "$user_id": {
+                        "userid": {
+                            ".validate": "newData.isString() && newData.val() == $user_id"
+                        },
+                        "username": {
+                            ".validate": "newData.isString()"
+                        },
+                        "$other": {
+                            ".validate": false
+                        }
+                    }
+                },
+                "creator": {
+                    ".validate": "newData.isString()"
+                },
+                "revealed": {
+                    ".validate": "newData.isBoolean()"
+                },
+                "$other": {
+                    ".validate": false
+                }
+            }
+        }
     }
 }
