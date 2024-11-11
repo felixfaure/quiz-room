@@ -1,0 +1,146 @@
+@use "sass:math";
+
+@function div($v1, $v2) {
+    @return math.div($v1, $v2);
+}
+
+$taille-base: 16;
+@function em($target, $context: $taille-base) {
+    @return (math.div($target, $context) * 1em);
+}
+
+@function rem($target, $context: $taille-base) {
+    @return (math.div($target, $context) * 1rem);
+}
+
+@mixin clearfix {
+    &:after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+}
+
+@mixin srOnly {
+    position: absolute;
+    height: 1px !important;
+    width: 1px !important;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    overflow: hidden;
+    // margin: -1px;
+    padding: 0;
+    border: 0;
+    white-space: nowrap;
+}
+
+@mixin icomoon {
+    font-family: "icomoon";
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin materialicons {
+    font-family: "Material Icons";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1em;
+    display: block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "liga";
+}
+
+@mixin selection($current-selector: false) {
+    @if $current-selector {
+        &::-moz-selection {
+            @content;
+        }
+        &::selection {
+            @content;
+        }
+    } @else {
+        ::-moz-selection {
+            @content;
+        }
+        ::selection {
+            @content;
+        }
+    }
+}
+
+@mixin placeholder($current-selector: false) {
+    $placeholders: "::-webkit-input" ":-moz" "::-moz" ":-ms-input";
+    @if $current-selector {
+        @each $placeholder in $placeholders {
+            &#{$placeholder}-placeholder {
+                @content;
+            }
+        }
+    } @else {
+        @each $placeholder in $placeholders {
+            #{$placeholder}-placeholder {
+                @content;
+            }
+        }
+    }
+}
+
+@mixin mq($value: false, $query-type: "max") {
+    @if $query-type == "max" {
+        @media only screen and (max-width: em($value)) {
+            @content;
+        }
+    } @else if $query-type == "max-print" {
+        @media screen and (max-width: em($value)), print {
+            @content;
+        }
+    } @else if $query-type == "min" {
+        @media only screen and (min-width: em($value)) {
+            @content;
+        }
+    } @else if $query-type == "max-height" {
+        @media only screen and (max-height: em($value)) {
+            @content;
+        }
+    } @else if $query-type == "min-height" {
+        @media only screen and (min-height: em($value)) {
+            @content;
+        }
+    } @else if $query-type == "hdpi" {
+        @media only screen and (-webkit-min-device-pixel-ratio: $ratioHDPI),
+    only screen and (min--moz-device-pixel-ratio: $ratioHDPI),
+    only screen and (-o-min-device-pixel-ratio: #{$ratioHDPI}/1),
+    only screen and (min-resolution: round($ratioHDPI * 96dpi)),
+    only screen and (min-resolution: $ratioHDPI * 1dppx) {
+            @content;
+        }
+    } @else if $query-type == "orientation" {
+        @media all and (orientation: $value) {
+            @content;
+        }
+    } @else if $query-type == "min-ratio" {
+        @media screen and (min-aspect-ratio: $value) {
+            @content;
+        }
+    } @else if $query-type == "max-ratio" {
+        @media screen and (max-aspect-ratio: $value) {
+            @content;
+        }
+    } @else {
+        @warn "Type non supported.";
+    }
+}
