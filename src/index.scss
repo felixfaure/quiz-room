@@ -332,7 +332,7 @@ body,
     flex: 0 1 auto;
     padding: em(5, 16) em(14, 16);
     border-radius: em(8, 16);
-    background-color: $grey-bg;
+    background-color: $color-bg;
     font-size: rem(16);
     position: relative;
     counter-increment: nb;
@@ -360,6 +360,7 @@ body,
 }
 .game_txt {
     padding-bottom: rem(5);
+    color: $color2;
 }
 
 .game_letters {

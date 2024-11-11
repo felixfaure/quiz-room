@@ -3,7 +3,14 @@ $white: #fff;
 $grey-txt: #d0d5dd;
 $grey-border: #d0d5dd;
 $grey-bg: #f9fafb;
-$color1: #221fce;
+$color1-1: #519548;
+$color1-2: #88c425;
+$color1-3: #bef202;
+$color1-4: #eafde6;
+$color1: $color1-1;
+$color2: #1b676b;
+
+$color-bg: $color1-4;
 
 $pad: 20;
 $radius: 20;
