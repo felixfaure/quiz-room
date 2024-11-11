@@ -1,6 +1,5 @@
 # Quiz Room
 
-**Quiz Room** is a web app that allows users to create or join "rooms" to participate in quizzes with friends. The app uses Firebase for real-time data management and hosting.
 **Quiz Room** is a minimalist web app designed to be an accessory for playing a quiz in person with your friends. The app does not include the quiz questions itself, but instead serves as a tool to track answers and ensure fairness during gameplay. Players can join a unique room, submit their answers, and the app records the order in which answers are submitted, making it clear who answered first. It also prevents players from changing their answers after submission or copying from others.
 
 The app uses Firebase for real-time data management and hosting.
